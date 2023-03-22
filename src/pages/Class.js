@@ -23,7 +23,14 @@ const Class = () => {
   }
 
   const handleAdd = () => {
-    dispatch(addItem({ name: item.name, price: item.hit_die * 2 }));
+    dispatch(
+      addItem({
+        index: item.index,
+        name: item.name,
+        price: item.hit_die * 2,
+        amount: 1,
+      })
+    );
   };
 
   return (

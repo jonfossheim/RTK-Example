@@ -14,6 +14,7 @@ const App = () => {
         <h4>
           Items in Cart: {cart.items.length} || Total Price: {cart.total}
         </h4>
+        <h5>Duplicates found: {cart.trigger}</h5>
         <ul>
           <li>
             <Link to='/'>Home</Link>

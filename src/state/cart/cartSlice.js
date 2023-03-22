@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   items: [],
   total: 0,
+  trigger: 0,
 };
 
 export const cartSlice = createSlice({
@@ -13,8 +14,23 @@ export const cartSlice = createSlice({
   // These are the actions that will be made available
   reducers: {
     addItem: (state, action) => {
-      state.items.push(action.payload);
-      state.total = state.total + action.payload.price;
+      let isFound = state.items.some((item) => {
+        if (action.payload.index === item.index) {
+          return true;
+        }
+        return false;
+      });
+
+      if (isFound) {
+        let x = state.items.findIndex(
+          (item) => item.index === action.payload.index
+        );
+        state.items[x].amount += 1;
+        state.total = state.total + action.payload.price;
+      } else {
+        state.items.push(action.payload);
+        state.total = state.total + action.payload.price;
+      }
     },
     removeLast: (state) => {
       let index = state.items.length - 1;
